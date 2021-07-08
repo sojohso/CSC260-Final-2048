@@ -25,7 +25,7 @@ namespace _2048.Classes
 			throw new NotImplementedException();
 		}
 
-		public string get_color()
+		public string get_color(int number)
 		{
 			throw new NotImplementedException();
 		}

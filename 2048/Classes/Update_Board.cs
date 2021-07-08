@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _2048.Classes
 {
-	public class Update_Board
+	class Update_Board : Game
 	{
 		public Update_Board()
 		{
