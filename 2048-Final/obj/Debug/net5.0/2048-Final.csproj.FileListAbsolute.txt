@@ -1,0 +1,16 @@
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.exe
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.deps.json
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.runtimeconfig.json
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.runtimeconfig.dev.json
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.dll
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\ref\2048-Final.dll
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\bin\Debug\net5.0\2048-Final.pdb
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.csproj.AssemblyReference.cache
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.AssemblyInfoInputs.cache
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.AssemblyInfo.cs
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.csproj.CoreCompileInputs.cache
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.dll
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\ref\2048-Final.dll
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.pdb
+C:\Users\riley\Desktop\Sophie\Summer2021\CSC260\Final Project\Project\2048-Final\obj\Debug\net5.0\2048-Final.genruntimeconfig.cache
