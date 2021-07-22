@@ -7,7 +7,6 @@ namespace _2048_Final
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             Game game = new Game();
         }
     }

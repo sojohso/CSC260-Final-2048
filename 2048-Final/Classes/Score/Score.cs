@@ -22,6 +22,10 @@ namespace _2048_Final.Classes.Score
             this.high_score = System.IO.File.ReadAllText(file);
             this.hs = int.Parse(high_score);
         }
+        internal int get_score()
+        {
+            return score;
+        }
 
         internal int calculate_score(int v)
         {
@@ -48,9 +52,6 @@ namespace _2048_Final.Classes.Score
                 File.WriteAllTextAsync(file, high_score);
             }
         }
-        //return value of high score
-        //compare score
-            //update score
 
 
     }
