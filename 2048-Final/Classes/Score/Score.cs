@@ -5,22 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace _2048_Final.Classes.Score
+namespace _2048_Final.Classes.ScoreNS
 {
-    using Message;
+    using MessageNS;
     class Score
     {
         private int score;
         private string high_score;
         private string file;
         private int hs;
-        Message msg = new Message();
+        private Message msg = new Message();
         public Score()
         {
             this.score = 0;
             this.file = "..\\..\\..\\Classes\\Score\\high_score.txt";
             this.high_score = System.IO.File.ReadAllText(file);
             this.hs = int.Parse(high_score);
+        }
+        internal int get_score()
+        {
+            return score;
         }
 
         internal int calculate_score(int v)
@@ -36,22 +40,16 @@ namespace _2048_Final.Classes.Score
             Console.WriteLine("Score: " + score);
             Console.WriteLine("High Score: " + hs);
         }
-
-        private void check_hs()
-        {
-            if(hs >= score)
-                return;
-            else if(score > hs)
+        internal void check_hs() {
+            if (hs < score)
             {
                 hs = score;
                 high_score = hs.ToString();
                 File.WriteAllTextAsync(file, high_score);
             }
+            else
+                return;
         }
-        //return value of high score
-        //compare score
-            //update score
-
 
     }
 }
