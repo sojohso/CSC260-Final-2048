@@ -4,27 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2048_Final.Classes.Message
+namespace _2048_Final.Classes.MessageNS
 {
-    using Game;
-    using Board;
-    using Score;
-    class Message
+    using BoardNS;
+    internal class Message
     {
         private bool _lost;
-        internal string msg;
+        private string msg;
         private string input;
 
         public Message()
         {
             this.msg = "";
         }
-
         private void display_msg(int score)
         {
             Console.WriteLine(msg);
             Console.WriteLine("Score: " + score);
-            if (!_lost)
+            if (_lost != true)
             {
                 do
                 {
@@ -40,9 +37,9 @@ namespace _2048_Final.Classes.Message
                 Environment.Exit(0);
             }
         }
-        internal void lost_check(Board board, int score)
+        internal void check_full(Board board, int score) //checks if it lost, weird name, just to show polymorphism
         {
-            int check = 0;
+            int check;
             check = check_vertical(board);
             check += check_horizontal(board);
             if (check == 8)

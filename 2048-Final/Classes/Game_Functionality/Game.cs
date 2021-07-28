@@ -5,27 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace _2048_Final.Classes.Game
+namespace _2048_Final.Classes.GameNS
 {
-    using Board;
-    using Score;
-    using Color;
-    using Color_Output;
-    using Message; 
-    class Game
+    using BoardNS;
+    using ScoreNS;
+    using ColorNS;
+    using Color_OutputNS;
+    using MessageNS; 
+    internal class Game
     {
-        private readonly int columns;
-        private readonly int rows;
+        private readonly int columns = 4;
+        private readonly int rows = 4;
         Board board = new Board();
         Score score = new Score();
         Color color = new Color();
-        Message msg = new Message();
+        readonly Message msg = new Message();
 
         public Game()
         {
-
-            this.columns = 4;
-            this.rows = 4;
             initialize_board();
             insert_first_value();
         }
@@ -39,7 +36,6 @@ namespace _2048_Final.Classes.Game
                     board.set_board_values(i, j, 0);
                 }
             }
-            insert_first_value();
         }
 
         private void insert_first_value()
@@ -61,15 +57,14 @@ namespace _2048_Final.Classes.Game
 
         private void print_board()
         {
-            //Console.Clear();
-            //will add ^ after debugging
+            Console.Clear();
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
                     using (new Color_Output(color.get_color(board.get_board_values(i, j))))
                     {
-                        Console.Write(string.Format("{0,4}", board.get_board_values(i, j)));
+                       Console.Write(string.Format("{0,5}", board.get_board_values(i, j)));
                     }
                 }
                 Console.WriteLine();
@@ -117,7 +112,6 @@ namespace _2048_Final.Classes.Game
 
         private void keyboard_press()
         {
-            int i, j;
             Console.WriteLine();
             Console.WriteLine("Use arrow keys to move the game pieces, ctrl+ c to exit");
             var input = Console.ReadKey();
@@ -125,26 +119,22 @@ namespace _2048_Final.Classes.Game
             {
                 case ConsoleKey.LeftArrow:
                     move_blocks_left();
-                    Console.WriteLine("left");
                     break;
                 case ConsoleKey.RightArrow:
                     move_blocks_right();
-                    Console.WriteLine("right");
                     break;
                 case ConsoleKey.UpArrow:
                     move_blocks_up();
-                    Console.WriteLine("up");
                     break;
                 case ConsoleKey.DownArrow:
                     move_blocks_down();
-                    Console.WriteLine("down");
                     break;
                 default:
                     break;
             }
             insert_random_value();
             print_board();
-            msg.lost_check(board, score.get_score());
+            msg.check_full(board, score.get_score());
             keyboard_press();
         }
 
@@ -160,12 +150,19 @@ namespace _2048_Final.Classes.Game
                 tmp2 = board.get_board_values(i + 1, j); 
                 tmp3 = board.get_board_values(i + 2, j); 
                 tmp4 = board.get_board_values(i + 3, j); 
-                                                         
-                if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
+                                   
+                if(tmp1 == tmp4 && tmp1 != 0 && tmp2 == 0 && tmp3 == 0)
+                {
+                    tmp1 *= 2;
+                    board.set_board_values(0, j, tmp1);
+                    board.set_board_values(3, j, 0);
+                    score.calculate_score(tmp1);
+
+                }
+                else if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
                 {
                     tmp1 = tmp1 * 2;
                     board.set_board_values(0, j, tmp1);
-
                     board.set_board_values(1, j, 0);
                     tmp2 = board.get_board_values(1, j);
                     if (tmp3 == tmp4 && tmp3 != 0 && tmp4 != 0)
@@ -231,6 +228,7 @@ namespace _2048_Final.Classes.Game
                     board.set_board_values(1, j, tmp3);
                     board.set_board_values(2, j, 0);
                     board.set_board_values(3, j, 0);
+                    score.calculate_score(tmp3);
                 }
                 else if (tmp3 == tmp4 && tmp1 == 0 && tmp2 == 0 && tmp3 != 0)
                 {
@@ -250,7 +248,7 @@ namespace _2048_Final.Classes.Game
                 } else if(tmp1 == 0 && tmp2 != 0 && tmp3 == 0 && tmp4 != 0 && tmp2 != tmp4)
                 {
                     board.set_board_values(0, j, tmp2);
-                    board.set_board_values(1, j, tmp3);
+                    board.set_board_values(1, j, tmp4);
                     board.set_board_values(3, j, 0);
                 }
                 else if (tmp1 == 0 && tmp2 == 0 && tmp3 == 0 && tmp4 != 0)
@@ -331,8 +329,18 @@ namespace _2048_Final.Classes.Game
                 tmp3 = board.get_board_values(i + 1, j);    //2nd uppermost
                 tmp2 = board.get_board_values(i + 2, j);
                 tmp1 = board.get_board_values(i + 3, j);
-                                                         
-                if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
+                  
+                
+                if(tmp1 == tmp2 && tmp1 != 0 && tmp3 != 0 && tmp4 != 0 && tmp2 != tmp3 && tmp3 != tmp4)
+                {
+                    tmp1 = tmp1 * 2;
+                    board.set_board_values(3, j, tmp1);
+                    board.set_board_values(2, j, tmp3);
+                    board.set_board_values(1, j, tmp4);
+                    board.set_board_values(0, j, 0);
+                    score.calculate_score(tmp1);
+                }
+                else if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
                 {
                     tmp1 = tmp1 * 2;
                     board.set_board_values(3, j, tmp1);
@@ -376,14 +384,12 @@ namespace _2048_Final.Classes.Game
                 }
                 else if(tmp2 == tmp3 && tmp2 != 0 && tmp1 != 0 && tmp1 != tmp2 && tmp3 != tmp4 && tmp4 != 0)
                 {
-                    tmp2 *= tmp2;
                     board.set_board_values(2, j, tmp2);
                     board.set_board_values(1, j, tmp4);
                     board.set_board_values(0, j, 0);
                     score.calculate_score(tmp2);
-
                 }
-                else if(tmp2 == tmp3 && tmp2 != tmp1 && tmp1 == 0 && tmp3 != tmp4 && tmp4 != 0)
+                else if(tmp2 == tmp3 && tmp2 != tmp1 && tmp1 == 0 && tmp3 != tmp4 && tmp4 != 0 && tmp2 != 0)
                 {
                     tmp2 *= 2;
                     board.set_board_values(3, j, tmp2);
@@ -434,6 +440,13 @@ namespace _2048_Final.Classes.Game
                     board.set_board_values(0, j, 0);
                     score.calculate_score(tmp2);
                 } 
+                else if(tmp3 == tmp4 && tmp3 != 0 && tmp2 != 0 && tmp2 != tmp3 && tmp1 != 0 && tmp1 != tmp2)
+                {
+                    tmp3 *= 2;
+                    board.set_board_values(1, j, tmp3);
+                    board.set_board_values(0, j, 0);
+                    score.calculate_score(tmp3);
+                } 
                 else if(tmp3 == tmp4 && tmp3 != 0 && tmp2 != 0 && tmp2 != tmp3 && tmp1 == 0)
                 {
                     tmp3 *= 2;
@@ -452,13 +465,17 @@ namespace _2048_Final.Classes.Game
                     board.set_board_values(0, j, 0);
                     score.calculate_score(tmp3);
                 }
-                else if (tmp3 == tmp4 && tmp3 != tmp2 && tmp1 != tmp2)
+                else if (tmp3 == tmp4 && tmp3 != tmp2 && tmp1 != tmp2 && tmp3 != 0)
                 {
                     tmp3 = tmp3 * 2;
                     board.set_board_values(1, j, tmp3);
                     board.set_board_values(0, j, 0);
                     score.calculate_score(tmp3);
 
+                } else if(tmp1 != tmp4 && tmp1 != 0 && tmp4 != 0 && tmp2 == 0 && tmp3 == 0)
+                {
+                    board.set_board_values(2, j, tmp4);
+                    board.set_board_values(0, j, 0);
                 }
                 else if(tmp1 == 0 && tmp2 != 0 && tmp3 == 0 && tmp4 == 0)
                 {
@@ -556,7 +573,16 @@ namespace _2048_Final.Classes.Game
                 tmp3 = board.get_board_values(i, j + 2); 
                 tmp4 = board.get_board_values(i, j + 3); 
 
-                if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
+
+                if(tmp1 == tmp2 && tmp1 != 0 && tmp3 == 0 && tmp4 != 0 && tmp2 != tmp4)
+                {
+                    tmp1 = tmp1 * 2;
+                    board.set_board_values(i, 0, tmp1);
+                    board.set_board_values(i, 1, tmp4);
+                    board.set_board_values(i, 3, 0);
+                    score.calculate_score(tmp1);
+                }
+                else if (tmp1 == tmp2 && tmp1 != 0 && tmp2 != 0)
                 {
                     tmp1 = tmp1 * 2;
                     board.set_board_values(i, 0, tmp1);
@@ -630,7 +656,8 @@ namespace _2048_Final.Classes.Game
                     board.set_board_values(i, 2, 0);
                     board.set_board_values(i, 3, 0);
                     score.calculate_score(tmp2);
-                } else if(tmp3 == tmp4 && tmp3 != 0 && tmp1 == 0 && tmp2 != 0 && tmp2 != tmp3)
+                }
+                else if(tmp3 == tmp4 && tmp3 != 0 && tmp1 == 0 && tmp2 != 0 && tmp2 != tmp3)
                 {
                     tmp3 *= 2;
                     board.set_board_values(i, 0, tmp2);
@@ -757,15 +784,15 @@ namespace _2048_Final.Classes.Game
                         board.set_board_values(i, 2, tmp4);
                         board.set_board_values(i, 1, 0);
                         board.set_board_values(i, 0, 0);
+                        score.calculate_score(tmp1);
                     }
                     else
                     {
                         board.set_board_values(i, 2, tmp3);
                         board.set_board_values(i, 1, tmp4);
                         board.set_board_values(i, 0, 0);
+                        score.calculate_score(tmp1);
                     }
-
-                    score.calculate_score(tmp1);
 
                 }
                 else if (tmp1 == tmp3 && tmp2 == 0 && tmp1 != 0 && tmp3 != 0)

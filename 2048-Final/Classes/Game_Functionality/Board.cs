@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2048_Final.Classes.Board
+namespace _2048_Final.Classes.BoardNS
 {
-    using Color;
     internal class Board
     {
-        readonly int r = 4;
-        readonly int c = 4;
+        readonly private int r = 4;
+        readonly private int c = 4;
         public Board()
         {
             this.column = c;

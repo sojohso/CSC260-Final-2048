@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2048_Final.Classes.Color_Output
+namespace _2048_Final.Classes.Color_OutputNS
 {
     class Color_Output : IDisposable
     {

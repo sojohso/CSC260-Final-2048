@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2048_Final.Classes.Color
+namespace _2048_Final.Classes.ColorNS
 {
     class Color
     {
-        ConsoleColor a; //0
-        ConsoleColor b; //2
-        ConsoleColor c; //4
-        ConsoleColor d; //8
-        ConsoleColor e; //16
-        ConsoleColor f; //32
-        ConsoleColor g; //64
-        ConsoleColor h; //128
-        ConsoleColor i; //256
-        ConsoleColor j; //512
-        ConsoleColor k; //1024
-        ConsoleColor l; //2048
-        ConsoleColor m; //default
+        private ConsoleColor a; //0
+        private ConsoleColor b; //2
+        private ConsoleColor c; //4
+        private ConsoleColor d; //8
+        private ConsoleColor e; //16
+        private ConsoleColor f; //32
+        private ConsoleColor g; //64
+        private ConsoleColor h; //128
+        private ConsoleColor i; //256
+        private ConsoleColor j; //512
+        private ConsoleColor k; //1024
+        private ConsoleColor l; //2048
+        private ConsoleColor m; //default
         public Color()
         {
             a = ConsoleColor.White;
